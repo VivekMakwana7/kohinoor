@@ -66,12 +66,9 @@ class _ItemDetailState extends State<ItemDetail> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
                     CarouselSlider(
                       items: imageList
                           .map(
@@ -180,30 +177,29 @@ class _ItemDetailState extends State<ItemDetail> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 12,
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: SizedBox(
-                        height: contextHeight(context) * 0.05,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listSize.length,
-                          itemBuilder: (context, index) {
-                            return RoundedText(
-                              text: listSize[index].toUpperCase(),
-                              boxColor: Colors.blue,
-                              textColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 18, vertical: 7),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(
-                                width: contextWidth(context) * 0.04);
-                          },
-                        ),
+                      child: Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: 12.0,
+                        children: <Widget>[
+                          for (int index = 0; index < listSize.length; index++)
+                            ChoiceChip(
+                              padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 6),
+                              selectedColor: Colors.blue,
+                              backgroundColor: Colors.grey[100],
+                              label: Text(
+                                listSize[index],
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
+                              selected: index == index,
+                              onSelected: (bool selected) {},
+                            ),
+                        ],
                       ),
                     ),
                     const SizedBox(
@@ -232,37 +228,37 @@ class _ItemDetailState extends State<ItemDetail> {
                         ),
                       ),
                     ),
-                    Spacer(),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                      height: 50,
-                      width: contextWidth(context),
-                      decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        stops: [
-                          0.1,
-                          0.9,
-                        ],
-                        colors: [
-                          Color(0xFFFABC05),
-                          Color(0xFFFFD455),
-                        ],
-                      )),
-                      child: const Center(
-                        child: Text(
-                          'Mark As Sold',
-                          style: TextStyle(color: Colors.white,fontSize: 15),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton:  Container(
+        margin:
+        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        height: 50,
+        width: contextWidth(context),
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: [
+                0.1,
+                0.9,
+              ],
+              colors: [
+                Color(0xFFFABC05),
+                Color(0xFFFFD455),
+              ],
+            )),
+        child: const Center(
+          child: Text(
+            'Mark As Sold',
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          ),
         ),
       ),
     );

@@ -6,4 +6,5 @@ class ImageHelper{
   static String homeSvg = 'assets/svg/home.svg';
   static String moreSvg = 'assets/svg/more.svg';
   static String swipeSvg = 'assets/svg/swipe.svg';
+  static String searchSvg = 'assets/svg/search.svg';
 }

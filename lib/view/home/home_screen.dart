@@ -1,15 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:kohinoor/helper/common/bg_image_widget.dart';
-import 'package:kohinoor/helper/common/rounded_text.dart';
-import 'package:kohinoor/helper/common/sizer.dart';
-import 'package:kohinoor/helper/string_helper.dart';
-import 'package:kohinoor/view/detail/item_detail.dart';
+import 'package:kohinoor/view/contact/contact.dart';
 import 'package:kohinoor/view/home/item_list_widget.dart';
 import 'package:kohinoor/view/search/search_screen.dart';
 
+import '../../helper/common/bottom_menu_button.dart';
 import '../../helper/image_helper.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,9 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int bottomMenuSelected = 0;
 
   List<Widget> listOfWidget = [
-    ItemList(),
-    SearchScreen(),
-    Container()
+    const ItemList(),
+    const SearchScreen(),
+    ContactPage()
   ];
 
   @override
@@ -58,35 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               for (int i = 0; i < bottomMenuList.length; i++)
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       bottomMenuSelected = i;
                     });
                   },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 45,
-                        width: 45,
-                        child: SvgPicture.asset(
-                          bottomMenuList[i],
-                          color: bottomMenuSelected == i
-                              ? Colors.blue
-                              : Colors.grey.withOpacity(0.5),
-                        ),
-                      ),
-                      if (bottomMenuSelected == i)
-                        Container(
-                          height: 5,
-                          width: contextWidth(context) * 0.06,
-                          decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        )
-                    ],
-                  ),
+                  child: BottomMenuButton(
+                      svgImage: bottomMenuList[i],
+                      bottomMenuSelected: i== bottomMenuSelected),
                 ),
             ],
           ),

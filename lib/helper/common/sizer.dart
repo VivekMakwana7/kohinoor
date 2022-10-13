@@ -7,3 +7,15 @@ contextHeight(BuildContext context){
 contextWidth(BuildContext context){
   return MediaQuery.of(context).size.width;
 }
+
+SizedBox heightBox(double height) {
+  return SizedBox(
+    height: height,
+  );
+}
+
+SizedBox widthBox(double width) {
+  return SizedBox(
+    width: width,
+  );
+}
